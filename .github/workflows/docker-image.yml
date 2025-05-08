@@ -28,7 +28,7 @@ jobs:
       run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
     
     - name: Build the Docker image
-      run: docker build . -f docker/Dockerfile --build-arg RUST_RELEASE_MODE=release -t "lemmy:${COMMIT_SHA}" -t "lemmy:latest"
+      run: docker build . -f docker/Dockerfile --build-arg RUST_RELEASE_MODE=release -t "${REGISTRY}/lemmy:${COMMIT_SHA}" -t "${REGISTRY}/lemmy:latest"
 
     - name: Push image to GHCR
       run: docker push $REGISTRY/$IMAGE_NAME --all-tags
